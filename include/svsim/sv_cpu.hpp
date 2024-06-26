@@ -22,6 +22,17 @@ namespace NWQSim
     {
 
     public:
+        
+
+        ValType *state_real() override
+        {
+            return sv_real;
+        }
+        ValType *state_imag() override
+        {
+            return sv_imag;
+        }
+        
         SV_CPU(IdxType _n_qubits) : QuantumState(_n_qubits)
         {
             // Initialize CPU side
@@ -152,6 +163,7 @@ namespace NWQSim
             printf("]\n");
         }
 
+    public:
     protected:
         // n_qubits is the number of qubits
         IdxType n_qubits;
@@ -159,6 +171,8 @@ namespace NWQSim
         IdxType dim;
         IdxType half_dim;
         IdxType n_cpu;
+        
+        
 
         // CPU arrays
         ValType *sv_real;

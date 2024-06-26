@@ -16,6 +16,10 @@ namespace NWQSim
     class QuantumState
     {
     public:
+
+        virtual ValType *state_real() = 0;
+        virtual ValType *state_imag() = 0;
+        
         QuantumState(IdxType _n_qubits)
         {
             Config::Load();
