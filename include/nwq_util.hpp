@@ -2,7 +2,7 @@
 
 #include <assert.h>
 #include <iostream>
-#include <sys/time.h>
+#include <time.h>
 #include <vector>
 #include <chrono>
 #include <iomanip>
@@ -86,12 +86,13 @@ namespace NWQSim
      * CPU Timer based on Linux sys/time.h
      ***********************************************/
     // CPU timer
-    inline double get_cpu_timer()
+    inline long get_cpu_timer()
     {
-        struct timeval tp;
-        gettimeofday(&tp, NULL);
+        std::clock_t c_start = std::clock();
+        std::clock_t c_end = std::clock();
+        long time_elapsed_ms = 1000.0 * (c_end - c_start) / CLOCKS_PER_SEC;
         // get current timestamp in milliseconds
-        return (double)tp.tv_sec * 1e3 + (double)tp.tv_usec * 1e-3;
+        return time_elapsed_ms;
     }
     // CPU timer object definition
     typedef struct CPU_Timer

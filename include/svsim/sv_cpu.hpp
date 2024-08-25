@@ -139,13 +139,22 @@ namespace NWQSim
             return result;
         }
 
+        int custom_parity(unsigned int x) {
+            int parity = 0;
+            while (x) {
+                parity ^= (x & 1);
+                x >>= 1;
+            }
+            return parity;
+        }
+
         virtual ValType get_exp_z() override
         {
             double result = 0.0;
 
             for (unsigned long long i = 0; i < dim; ++i)
             {
-                bool parity = __builtin_parity(i);
+                bool parity = custom_parity(i);
                 result += (parity ? -1.0 : 1.0) * (sv_real[i] * sv_real[i] + sv_imag[i] * sv_imag[i]);
             }
 

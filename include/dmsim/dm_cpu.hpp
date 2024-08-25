@@ -25,6 +25,16 @@ namespace NWQSim
     {
 
     public:
+
+        ValType *state_real() override
+        {
+            return dm_real;
+        }
+        ValType *state_imag() override
+        {
+            return dm_imag;
+        }
+
         DM_CPU(IdxType _n_qubits) : QuantumState(_n_qubits)
         {
             // Initialize CPU side
