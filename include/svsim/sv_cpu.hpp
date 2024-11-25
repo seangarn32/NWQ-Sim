@@ -488,13 +488,24 @@ namespace NWQSim
             for (IdxType i = 0; i < ((IdxType)1 << n_qubits); i++)
             {
                 if ((i & mask) != 0)
+                {
+                    // sv_real[i] = trunc(sv_real[i]*10000000)/10000000;
+                    // sv_imag[i] = trunc(sv_imag[i]*10000000)/10000000;
                     prob_of_one += (sv_real[i] * sv_real[i]) + (sv_imag[i] * sv_imag[i]); // square
-            }
-            assert(prob_of_one <= 1.0);
+                    sv_real[i] = 0;
+                    sv_imag[i] = 0;
+                }
 
-            if (prob_of_one < 1.0) // still possible to normalize
+            }
+            // if (prob_of_one > 1){
+            //     std::cout << "Norm-1 in reset gate: " << (prob_of_one-1) << std::endl;
+            //     //std::cout << "index: "<< i <<"Real: " << sv_real[i] << " Imag: " << sv_imag[i] << std::endl;
+            // }
+            assert(prob_of_one <= (IdxType)1);
+
+            if (prob_of_one < (IdxType)1) // still possible to normalize
             {
-                ValType normalize_factor = sqrt(1.0 - prob_of_one);
+                ValType normalize_factor = sqrt((IdxType)1 - prob_of_one);
                 for (IdxType i = 0; i < dim; i++)
                 {
                     if ((i & mask) == 0)
