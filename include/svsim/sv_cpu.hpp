@@ -74,7 +74,7 @@ namespace NWQSim
             memset(sv_imag, 0, sv_size);
             memset(m_real, 0, sv_size + sizeof(ValType));
             // State Vector initial state [0..0] = 1
-            sv_real[0] = 1.;
+            sv_real[0] = 1.0;
         }
 
         void set_seed(IdxType seed) override
